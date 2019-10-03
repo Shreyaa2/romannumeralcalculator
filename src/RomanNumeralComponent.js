@@ -7,8 +7,33 @@ export default function RomanNumeralComponent () {
 
     const addAndConvertToRomanNumerals = (ints) => {
         /* Implement me! */
-        return ints;
+        /* checks if input is just zero*/
+        if (ints == 0) return "nulla";
+        /* limit to the length of input */
+        if (ints.length > 15) return "input limit reached";
+        var sum = 0;
+        /* Sums all the elemets in the array*/
+        for ( let i =0; i < ints.length; i++ ) { 
+            sum += ints[i];
+        }
+        /*converts sum to its roman equivalent  */
+        let roman = converttoroman(sum);
+        return roman;
     }
+
+    const converttoroman = (n) => {
+        var decimal = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+        var roman = ["M", "CM","D","CD","C", "XC", "L", "XL", "X","IX","V","IV","I"];
+    var result = "";
+    /* maps all the roman to deciman numbers*/
+        for (let i = 0; i<= decimal.length; i++) {
+            while (n%decimal[i] < n) {
+                result += roman[i];
+                n -= decimal[i];
+            }
+        }
+        return result;
+            };
 
     const addNumbers = (inputString) => {
         const numbersStringArray = inputString.split(",");
